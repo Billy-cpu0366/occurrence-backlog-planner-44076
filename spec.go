@@ -71,10 +71,10 @@ func (s *SpecSchedule) Next(t time.Time) time.Time {
 	// as local to the time provided.
 	origLocation := t.Location()
 	loc := s.Location
-	if loc == time.Local {
+	if loc == nil || loc == time.Local {
 		loc = t.Location()
 	}
-	if s.Location != time.Local {
+	if s.Location != nil && s.Location != time.Local {
 		t = t.In(s.Location)
 	}
 
